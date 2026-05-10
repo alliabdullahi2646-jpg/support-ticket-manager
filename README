@@ -25,3 +25,29 @@ A Java console application for managing customer support tickets as part of Mabl
 
 ## Notes
 Data is stored in memory only. Closing the program will clear all tickets.
+
+# Support Ticket Console Manager
+
+A simple console-based support ticket management system built for Mablewave Technologies SIWES prep.
+
+## Features
+- Create support tickets with ID, client name, issue, priority, status, assigned staff
+- View all tickets
+- Update ticket status: OPEN, IN_PROGRESS, RESOLVED, CLOSED
+- Search by Ticket ID or Client Name
+- View ticket summary stats
+
+## How to Run
+1. Clone the repo: `git clone https://github.com/alliabdullahi2646-jpg/support-ticket-manager.git`
+2. Open in IntelliJ IDEA or VS Code
+3. Run `Main.java`
+4. Use the menu in the console
+
+## Project Structure
+- `model/` - Ticket class, Status enum, Priority enum
+- `service/` - TicketService with all business logic
+- `util/` - Helper methods
+- `Main.java` - Menu and user input handling
+
+## Concepts Used
+Classes, Objects, Encapsulation, Enums, ArrayList, Scanner, Exception Handling
