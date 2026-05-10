@@ -1,33 +1,25 @@
 package Service;
 
-import model.Ticket;
 import model.priorityLevel;
+import model.Ticket;
 import model.TicketStatus;
+
 import java.util.ArrayList;
 import java.util.List;
 
 public class TicketService {
     private List<Ticket> tickets = new ArrayList<>();
-    private int idCounter = 1;
+    private int nextId = 1;  // <--- add this line
 
-    public Ticket createTicket(String clientName, String issueTitle, priorityLevel priority, String assignedStaff) {
-        Ticket ticket = new Ticket(idCounter++, clientName, issueTitle, priority, assignedStaff);
+    public Ticket createTicket(String clientName, String issueTitle, String issueDescription,
+                               priorityLevel priority, String assignedStaff) {
+        Ticket ticket = new Ticket(nextId++, clientName, issueTitle, issueDescription, priority, assignedStaff);
         tickets.add(ticket);
         return ticket;
     }
 
     public List<Ticket> getAllTickets() {
         return tickets;
-    }
-
-    public void updateStatus(int ticketId, TicketStatus newStatus) {
-        for (Ticket t : tickets) {
-            if (t.getTicketId() == ticketId) {
-                t.setTicketStatus(newStatus);
-                return;
-            }
-        }
-        System.out.println("Ticket with ID " + ticketId + " not found.");
     }
 
     public Ticket findTicketById(int ticketId) {
@@ -39,7 +31,36 @@ public class TicketService {
         return null;
     }
 
-    public void deleteTicket(int ticketId) {
-        tickets.removeIf(t -> t.getTicketId() == ticketId);
+    public List<Ticket> findTicketsByClientName(String name) {
+        List<Ticket> result = new ArrayList<>();
+        for (Ticket t : tickets) {
+            if (t.getClientName().toLowerCase().contains(name.toLowerCase())) {
+                result.add(t);
+            }
+        }
+        return result;
+    }
+
+    public boolean updateStatus(int ticketId, TicketStatus newStatus) {
+        Ticket ticket = findTicketById(ticketId);
+        if (ticket != null) {
+            ticket.setTicketStatus(newStatus);
+            return true;
+        }
+        return false;
+    }
+
+    public boolean deleteTicket(int ticketId) {
+        return tickets.removeIf(t -> t.getTicketId() == ticketId);
+    }
+
+    public String getSummary() {
+        int total = tickets.size();
+        long open = tickets.stream().filter(t -> t.getTicketStatus() == TicketStatus.OPEN).count();
+        long resolved = tickets.stream().filter(t -> t.getTicketStatus() == TicketStatus.RESOLVED).count();
+        long highPriority = tickets.stream().filter(t -> t.getPriorityLevel() == priorityLevel.HIGH ||
+                t.getPriorityLevel() == priorityLevel.CRITICAL).count();
+        return String.format("Total: %d | Open: %d | Resolved: %d | High/Critical: %d",
+                total, open, resolved, highPriority);
     }
 }
