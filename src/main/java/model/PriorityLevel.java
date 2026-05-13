@@ -1,6 +1,6 @@
 package model;
 
-public enum priorityLevel {
+public enum PriorityLevel {
     LOW,
     MEDIUM,
     HIGH,

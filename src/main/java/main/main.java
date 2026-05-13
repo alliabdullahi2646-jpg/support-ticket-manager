@@ -1,6 +1,6 @@
 package main;
 
-import model.priorityLevel;
+import model.PriorityLevel;
 import model.TicketStatus;
 import model.Ticket;
 import Service.TicketService;
@@ -22,7 +22,8 @@ public class main {
             System.out.println("3. Update Ticket Status");
             System.out.println("4. Search Ticket");
             System.out.println("5. Ticket Summary");
-            System.out.println("6. Exit");
+            System.out.println("6. delete summary");
+            System.out.println("7. Exit");
             System.out.print("Enter choice: ");
 
             try {
@@ -48,9 +49,9 @@ public class main {
                     String desc = scanner.nextLine();
 
                     System.out.print("Priority LOW/MEDIUM/HIGH/CRITICAL: ");
-                    priorityLevel priority;
+                    PriorityLevel priority;
                     try {
-                        priority = priorityLevel.valueOf(scanner.nextLine().toUpperCase());
+                        priority = PriorityLevel.valueOf(scanner.nextLine().toUpperCase());
                     } catch (IllegalArgumentException e) {
                         System.out.println("Invalid priority.");
                         break;
@@ -121,10 +122,26 @@ public class main {
                     System.out.println(service.getSummary());
                     pause(scanner);
                     break;
-
                 case 6:
+                    System.out.print("Enter ticket ID to delete: ");
+                    try {
+                        int deleteId = Integer.parseInt(scanner.nextLine());
+                        if (service.deleteTicket(deleteId)) {
+                            System.out.println("Ticket deleted.");
+                        } else {
+                            System.out.println("Ticket not found.");
+                        }
+                    } catch (NumberFormatException e) {
+                        System.out.println("Invalid ID. Enter a number.");
+                    }
+                    pause(scanner);
+                    break;
+
+                case 7:
                     System.out.println("Exiting...");
                     break;
+
+
 
                 default:
                     System.out.println("Invalid choice.");
