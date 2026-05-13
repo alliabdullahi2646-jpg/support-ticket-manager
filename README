@@ -1,0 +1,53 @@
+# Support Ticket Console Manager
+
+A Java console application for managing customer support tickets as part of Mablewave SIWES assignment.
+
+## Features
+1. Create Ticket - Log new customer issues with client name, priority, and assigned staff
+2. View Tickets - Display all tickets in a formatted list
+3. Update Ticket Status - Change status between OPEN, IN_PROGRESS, RESOLVED, CLOSED
+4. Search Ticket - Search by ID or client name
+5. Ticket Summary - View counts of total, open, resolved, and high/critical tickets
+6. Exit
+
+## How to Run
+1. Open the project in IntelliJ IDEA or any Java IDE
+2. Run `src/main/java/Main.java`
+3. Use the menu to navigate options 1-6
+
+## Project Structure
+## Concepts Used
+- Object Oriented Programming: Classes, encapsulation, enums
+- Collections: ArrayList for storing tickets
+- Exception Handling: Try-catch for invalid input
+- Java Streams: For filtering and counting in summary
+- Package organization
+
+## Notes
+Data is stored in memory only. Closing the program will clear all tickets.
+
+# Support Ticket Console Manager
+
+A simple console-based support ticket management system built for Mablewave Technologies SIWES prep.
+
+## Features
+- Create support tickets with ID, client name, issue, priority, status, assigned staff
+- View all tickets
+- Update ticket status: OPEN, IN_PROGRESS, RESOLVED, CLOSED
+- Search by Ticket ID or Client Name
+- View ticket summary stats
+
+## How to Run
+1. Clone the repo: `git clone https://github.com/alliabdullahi2646-jpg/support-ticket-manager.git`
+2. Open in IntelliJ IDEA or VS Code
+3. Run `Main.java`
+4. Use the menu in the console
+
+## Project Structure
+- `model/` - Ticket class, Status enum, Priority enum
+- `service/` - TicketService with all business logic
+- `util/` - Helper methods
+- `Main.java` - Menu and user input handling
+
+## Concepts Used
+Classes, Objects, Encapsulation, Enums, ArrayList, Scanner, Exception Handling
